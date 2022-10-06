@@ -189,6 +189,12 @@ int main()
 
     std::vector<MDBX_commit_latency> latencies;
     int count = 0;
+    LARGE_INTEGER time1, time2;
+    LARGE_INTEGER Frequency;
+
+    QueryPerformanceCounter(&time1);
+    QueryPerformanceFrequency(&Frequency);
+
     for (auto& node : flat_tree)
     {
         int64_t attr_idx = std::get<0>(node);
@@ -214,7 +220,10 @@ int main()
         }
     }
 
-    printf("count=%d\n", count);
+    QueryPerformanceCounter(&time2);
+    double time_ms = (time2.QuadPart - time1.QuadPart) * 1000.0 / Frequency.QuadPart;
+
+    printf("count=%d time=%.2f ms\n", count, time_ms);
 
     MDBX_commit_latency total{0, 0, 0, 0, 0, 0, 0};
     for (auto& latency : latencies)
