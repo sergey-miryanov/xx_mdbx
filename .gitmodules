@@ -1,0 +1,7 @@
+[submodule "libs/libmdbx"]
+	path = libs/libmdbx
+	url = https://gitflic.ru/project/erthink/libmdbx.git
+[submodule "libs/msgpack-c"]
+	path = libs/msgpack-c
+	url = https://github.com/msgpack/msgpack-c.git
+	branch = c_master
